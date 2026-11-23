@@ -1,7 +1,7 @@
 import Mathlib
 import PEqualNP.Defs
 
-namespace PEqualNP.Outside.L270
+namespace PEqualNP.Outside.L_meta_270
 
 open Finset PEqualNP.CircuitLowerBounds
 
@@ -386,8 +386,8 @@ private lemma all_outputs {n m k : ℕ} (S : Fin m → Finset (Fin n)) (C : Circ
     _ ≤ (Ico n (n + C.gates.length)).card := card_le_card hSub
     _ = C.size := by simp [Circuit.size]
 
-end PEqualNP.Outside.L270
+end PEqualNP.Outside.L_meta_270
 
 theorem PEqualNP.Outside.L_meta_270 : ∀ (n m k : ℕ) (S : Fin m → Finset (Fin n)) (C : PEqualNP.CircuitLowerBounds.Circuit) (o : Fin m → ℕ) (c : Fin m → ℕ), (∀ i j : Fin m, i ≠ j → (S i ∩ S j).card ≤ 1) → (∀ i : Fin m, 2 ≤ (S i).card) → (∀ g ∈ C.gates, (g.op = PEqualNP.CircuitLowerBounds.GateOp.and ∨ g.op = PEqualNP.CircuitLowerBounds.GateOp.or) ∧ g.inputs.length = 2) → (∀ (i : Fin m) (p : Fin n), (C.wires (List.ofFn (fun q : Fin n => decide (q = p)))).getD (o i) false = true ↔ p ∈ S i) → (∀ (i : Fin m) (x : Fin n → Bool), (Finset.univ.filter (fun q : Fin n => x q = true)).card ≤ k → (∀ q ∈ S i, x q = false) → (C.wires (List.ofFn x)).getD (o i) false = false) → (∀ i : Fin m, c i ≤ k) → (∀ i : Fin m, c i + 1 ≤ (S i).card) → ∑ i : Fin m, c i ≤ C.size := by
   intro n m k S C o c hPair _ hC hSingle hSparse hk hc
-  exact PEqualNP.Outside.L270.all_outputs S C o c hPair hC hSingle hSparse hk hc
+  exact PEqualNP.Outside.L_meta_270.all_outputs S C o c hPair hC hSingle hSparse hk hc
